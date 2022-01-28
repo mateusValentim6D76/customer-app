@@ -5,6 +5,16 @@
 <div class="container">
     <form #customerForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Client saved/updated successfully
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
+                    {{ error }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label>ID:</label>
@@ -15,7 +25,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Registry Date:</label>
-                    <input type="text" class="form-control" [ngModel]="customer.registrationDate" name="registrationDate" disabled="true">
+                    <input type="text" class="form-control" [ngModel]="customer.registrationDate"
+                        name="registrationDate" disabled="true">
                 </div>
             </div>
         </div>
@@ -58,7 +69,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Gender:</label>
-                    <input type="text" class="form-control"name="gender" [(ngModel)]="customer.gender" >
+                    <input type="text" class="form-control" name="gender" [(ngModel)]="customer.gender">
                 </div>
             </div>
         </div>
