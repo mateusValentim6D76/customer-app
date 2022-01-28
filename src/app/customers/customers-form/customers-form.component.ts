@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Customer } from '../customer';
 import {CustomersService} from '../../customers.service'
 
@@ -12,7 +13,10 @@ export class CustomersFormComponent implements OnInit {
   success: boolean = false
   errors: String[];
 
-  constructor(private service : CustomersService) { 
+  constructor(
+    private service : CustomersService,
+    private router : Router
+    ) { 
     this.customer = new Customer()
   }
 
@@ -31,6 +35,10 @@ export class CustomersFormComponent implements OnInit {
       this.errors = errorResponse.error.errors;
     }
     )
+  }
+
+  returnListCustomers(){
+    this.router.navigate(['/customers-list'])
   }
 
 }
