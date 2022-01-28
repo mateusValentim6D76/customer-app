@@ -20,10 +20,17 @@ export class CustomersFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.service.save(this.customer)
+    this.service
+    .save(this.customer)
     .subscribe(response => {
-      this.success = true
-    })
+      this.success = true;
+      this.errors = null;
+      this.customer = response
+    }, errorResponse => {
+      this.success = false;
+      this.errors = errorResponse.error.errors;
+    }
+    )
   }
 
 }
