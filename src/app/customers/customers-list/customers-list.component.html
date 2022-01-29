@@ -38,12 +38,32 @@
                         <td>
                             <button class="btn btn-primary" routerLink="/customers-form/{{customer.id}}">
                                 <i class="fa fa-edit"></i>
+                            </button>
 
+                            <button class="btn btn-danger" (click)="preparedDelete(customer)"
+                            data-toggle="modal" data-target="#deleteModal">
+                                <i class="fa fa-trash"></i>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div id="deleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirm</h4>
+                </div>
+                <div class="modal-body" *ngIf='customerSelected'>
+                    Confirm client deletion {{customerSelected.name}} ?
+                </div>
+                <div class="modal-footer">
+                   <button class="btn btn-success">Confirm</button> 
+                   <button class="btn btn-default">Cancel</button> 
+                </div>
+            </div>
         </div>
     </div>
 </div>

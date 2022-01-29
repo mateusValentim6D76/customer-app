@@ -11,6 +11,7 @@ import {CustomersService} from '../../customers.service'
 export class CustomersListComponent implements OnInit {
 
   customers: Customer[] = [];
+  customerSelected: Customer;
 
   constructor(
     private service:CustomersService,
@@ -26,5 +27,9 @@ export class CustomersListComponent implements OnInit {
 
   newRegistry(){
     this.router.navigate(['/customers-form'])
+  }
+
+  preparedDelete(customer : Customer){
+    this.customerSelected = customer;
   }
 }
