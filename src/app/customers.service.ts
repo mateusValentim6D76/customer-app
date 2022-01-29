@@ -25,4 +25,8 @@ export class CustomersService {
   getCustomerById(id: number) : Observable<Customer>{
     return this.http.get<any>(`http://localhost:8080/api/customers/${id}`)
   }
+
+  delete(customer: Customer) : Observable<any>{
+    return this.http.delete<any>(`http://localhost:8080/api/customers/${customer.id}`)
+  }
 }
