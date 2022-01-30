@@ -1,1 +1,35 @@
-<p>service-provided-list works!</p>
+<h1 class="mt-4">Service Provided</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrum-bitem active">Consult</li>
+</ol>
+<div class="container">
+    <form #consultForm="ngForm" (submit)="consult()">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="nameCustomer">Name Customer:</label>
+                <input type="text" [(ngModel)]="name" name="name" class="form-control" id="inputName">
+            </div>
+
+            <div class="col-md-6">
+                <label for="inputMonth">Month:</label>
+                <select [(ngModel)]="month" class="form-control" name="month" >
+                    <option value="">Select the month of service provided
+                    </option>
+                    <option *ngFor="let month of months" [value]="month">
+                        {{ month }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-search"></i> Consult
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
