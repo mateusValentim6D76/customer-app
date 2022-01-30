@@ -3,6 +3,7 @@ import { CustomersService } from 'src/app/customers.service';
 import { Customer } from 'src/app/customers/customer';
 import {} from '../../customers.service'
 import { ServiceProvided } from '../serviceProvided';
+import {ServiceProvidedService} from '../../service-provided.service'
 
 @Component({
   selector: 'app-service-provided-form',
@@ -11,9 +12,13 @@ import { ServiceProvided } from '../serviceProvided';
 })
 export class ServiceProvidedFormComponent implements OnInit {
 
+  success: boolean = false
+  errors: String[];
   customers: Customer[] = []
   service: ServiceProvided;
-  constructor(private customerService: CustomersService) { 
+  constructor(
+    private customerService: CustomersService, private serviceProvidedService: ServiceProvidedService)
+     { 
     this.service = new ServiceProvided();
   }
 
@@ -24,7 +29,16 @@ export class ServiceProvidedFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.service)
+    this.serviceProvidedService
+      .save(this.service)
+      .subscribe(response => {
+        this.success = true;
+        this.errors = null;
+        this.service = new ServiceProvided();
+      }, errorResponse => {
+        this.success = false;
+        this.errors = errorResponse.error.errors;
+      })
   }
 
 }
