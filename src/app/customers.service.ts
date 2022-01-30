@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Customer} from './customers/customer'
+import {environment} from '../environments/environment'
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,25 +9,27 @@ import { Observable } from 'rxjs';
 })
 export class CustomersService {
 
+  apiURL: String = environment.apiUrlBase + '/api/customers'
+
   constructor( private http: HttpClient) { }
 
    save(customer: Customer) : Observable<Customer>{
-    return this.http.post<Customer>('http://localhost:8080/api/customers', customer);
+    return this.http.post<Customer>(`${this.apiURL}`, customer);
    }
 
    update(customer: Customer) : Observable<any>{
-    return this.http.put<Customer>(`http://localhost:8080/api/customers/${customer.id}`, customer);
+    return this.http.put<Customer>(`${this.apiURL}/${customer.id}`, customer);
    }
 
   getCustomers(): Observable<Customer[]>{
-    return this.http.get<Customer[]>('http://localhost:8080/api/customers')
+    return this.http.get<Customer[]>(`${this.apiURL}`)
   }  
 
   getCustomerById(id: number) : Observable<Customer>{
-    return this.http.get<any>(`http://localhost:8080/api/customers/${id}`)
+    return this.http.get<any>(`${this.apiURL}/${id}`)
   }
 
   delete(customer: Customer) : Observable<any>{
-    return this.http.delete<any>(`http://localhost:8080/api/customers/${customer.id}`)
+    return this.http.delete<any>(`${this.apiURL}/${customer.id}`)
   }
 }
