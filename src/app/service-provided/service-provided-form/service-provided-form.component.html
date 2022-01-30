@@ -1,0 +1,62 @@
+<h1 class="mt-4">Service Provided</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrum-bitem active">New</li>
+</ol>
+<div class="container">
+    <form #form="ngForm" (submit)="onSubmit()">
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Customer:</label>
+                    <select class="form-control"
+                    [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="service.idCustomer">
+                        <option value="">Select...</option>
+                        <option *ngFor="let customer of customers" [ngValue]="customer.id">
+                            {{customer.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Description:</label>
+                    <input class="form-control" [(ngModel)]="service.description" 
+                    type="text" name="description" 
+                    id="inputDescription">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Date:</label>
+                    <input class="form-control" [(ngModel)]="service.dateService" 
+                    type="text" name="dateService" 
+                    id="inputDateService">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Value:</label>
+                    <input class="form-control" [(ngModel)]="service.value" 
+                    type="text" name="value" 
+                    id="inputValue">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-success" type="submit">Save
+                    <i class="fa fa-save"></i>
+                </button>
+                   
+            </div>
+        </div>
+    </form>
+</div>
