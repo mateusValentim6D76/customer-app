@@ -12,9 +12,10 @@ export class LoginComponent {
 
   username: string
   password: string
-  loginError: boolean
   register: boolean
   successMessage: string
+  errors: String[];
+
   constructor(private router: Router, private authService: AuthService) { }
 
   onSubmit(){
@@ -38,10 +39,11 @@ export class LoginComponent {
         .saveUser(user)
         .subscribe(response => {
           this.successMessage = "Successful registration, please login"
-          this.loginError = false
-        }, error => {
-          this.loginError = true
+        }, errorResponse => {
           this.successMessage = null
+          this.errors = errorResponse.error.errors;
+          
+          
         });
         
   }

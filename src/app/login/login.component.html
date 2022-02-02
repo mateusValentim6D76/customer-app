@@ -14,8 +14,8 @@
                                 <div class="alert alert-success" *ngIf="successMessage">
                                     {{ successMessage }}
                                 </div>
-                                <div class="alert alert-danger" *ngIf="loginError">
-                                    Login or Password incorret
+                                <div class="alert alert-danger" *ngFor="let error of errors">
+                                    {{ error }}
                                 </div>
                                 <form #loginForm="ngForm" (submit)="onSubmit()">
                                     <div class="form-group">
@@ -36,7 +36,7 @@
                                             Send
                                         </button>
 
-                                        <button type="button" class="btn btn-success" *ngIf="registry" (click)="registry()">
+                                        <button type="button" class="btn btn-success ml-1" *ngIf="registry" (click)="registry()">
                                             Register
                                         </button>
 
