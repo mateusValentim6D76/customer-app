@@ -10,15 +10,29 @@ import { User } from './user';
 })
 export class LoginComponent {
 
-  username: string
-  password: string
-  register: boolean
-  successMessage: string
+  username: string;
+  password: string;
+  register: boolean;
+  successMessage: string;
   errors: String[];
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(
+    private router: Router, 
+    private authService: AuthService) { }
 
   onSubmit(){
+
+    this.authService
+    .tryLogin(this.username, this.password)
+    .subscribe(response => {
+      const access_token = JSON.stringify(response);
+      localStorage.setItem('access_token', access_token)
+      this.router.navigate(['/home'])
+    }, errorResponse => {
+      this.errors = ['Invalid username or incorrect password']
+    })
+      
+    
     this.router.navigate(['/home'])
   }
 
@@ -39,10 +53,10 @@ export class LoginComponent {
         .saveUser(user)
         .subscribe(response => {
           this.successMessage = "Successful registration, please login"
-          this.register = false
-          this.username = ''
-          this.password = ''
-          this.errors = []
+          this.register = false;
+          this.username = '';
+          this.password = '';
+          this.errors = [];
         }, errorResponse => {
           this.successMessage = null
           this.errors = errorResponse.error.errors;
