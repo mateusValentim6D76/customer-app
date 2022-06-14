@@ -19,7 +19,7 @@ export class CustomersService {
     const headers = {
       'Authorization' : 'Bearer' + token.access_token
     }
-    return this.http.post<Customer>(`${this.apiURL}`, customer, {headers});
+    return this.http.post<Customer>(`${this.apiURL}`, customer, { headers });
    }
 
    update(customer: Customer) : Observable<any>{
@@ -32,7 +32,7 @@ export class CustomersService {
     const headers = {
       'Authorization' : 'Bearer' + token.access_token
     }
-    return this.http.get<Customer[]>(`${this.apiURL}`, {headers})
+    return this.http.get<Customer[]>(`${this.apiURL}`, { headers })
   }  
 
   getCustomerById(id: number) : Observable<Customer>{

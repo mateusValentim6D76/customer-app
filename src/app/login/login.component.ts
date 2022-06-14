@@ -27,6 +27,7 @@ export class LoginComponent {
     .subscribe(response => {
       const access_token = JSON.stringify(response);
       localStorage.setItem('access_token', access_token)
+      console.log(response)
       this.router.navigate(['/home'])
     }, errorResponse => {
       this.errors = ['Invalid username or incorrect password']
