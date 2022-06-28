@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor( private http: HttpClient ) {  }
 
-obterToken(){
+getToken(){
   const tokenString = localStorage.getItem('access_token')
   if(tokenString){
     const token = JSON.parse(tokenString).access_token
@@ -28,14 +28,26 @@ obterToken(){
 }
 
   isAuthenticated() : boolean{
-    const token = this.obterToken();
+    const token = this.getToken();
     if (token){
       const expired = this.jwtHelper.isTokenExpired(token)
       return !expired;
     }
     return false;
   }
-  
+
+  endSession(){
+    localStorage.removeItem('access_token')
+  }
+
+  getUserAuthenticated(){
+    const token = this.getToken();
+    if(token){
+    const user = this.jwtHelper.decodeToken(token).user_name
+    return user
+  }
+  return null
+}
  saveUser(user: User) : Observable<any>{
   return this.http.post<any>(this.apiURL, user)
  }
